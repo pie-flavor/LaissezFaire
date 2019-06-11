@@ -10,6 +10,8 @@ import org.spongepowered.api.asset.Asset
 import org.spongepowered.api.asset.AssetId
 import org.spongepowered.api.config.DefaultConfig
 import org.spongepowered.api.event.Listener
+import org.spongepowered.api.event.game.state.GameInitializationEvent
+import org.spongepowered.api.event.game.state.GamePostInitializationEvent
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent
 import org.spongepowered.api.plugin.Plugin
 import java.nio.file.Files
@@ -47,6 +49,18 @@ class Main @Inject constructor(
             asset.copyToFile(file)
         }
         config = loader.load().getValue(typeTokenOf<Config>())!!
+        BlockLocation.register()
+        Shop.register()
+    }
+
+    @[Listener PublishedApi]
+    internal fun onInit(e: GameInitializationEvent) {
+        Commands.register()
+    }
+
+    @[Listener PublishedApi]
+    internal fun onPostInit(e: GamePostInitializationEvent) {
+        Permissions.register()
     }
 
 }
