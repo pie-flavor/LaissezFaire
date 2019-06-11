@@ -9,8 +9,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "PS_TEMPLATE_GROUP_NAME"
-version = "PS_TEMPLATE_VERSION"
+group = "flavor.pie"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
@@ -50,8 +50,8 @@ tasks.named("jar") {
 val shadowJar = tasks.named<ShadowJar>("shadowJar") {
     configurations = listOf(project.configurations.shadow.get())
     archiveClassifier.set("")
-    relocate("kotlin", "PS_TEMPLATE_BASE_PACKAGE_NAME.runtime.kotlin")
-    relocate("flavor.pie.kludge", "PS_TEMPLATE_BASE_PACKAGE_NAME.util.kludge")
+    relocate("kotlin", "flavor.pie.laissezfaire.runtime.kotlin")
+    relocate("flavor.pie.kludge", "flavor.pie.laissezfaire.util.kludge")
 }
 
 tasks.build {
@@ -71,26 +71,26 @@ publishing {
         create("sponge", MavenPublication::class.java) {
             project.shadow.component(this)
             pom {
-                name.set("PS_TEMPLATE_PLUGIN_NAME")
-                description.set("PS_TEMPLATE_PLUGIN_DESCRIPTION")
-                url.set("https://ore.spongepowered.org/PS_TEMPLATE_USER_NAME/PS_TEMPLATE_PLUGIN_ID/")
+                name.set("LaissezFaire")
+                description.set("A shop plugin")
+                url.set("https://ore.spongepowered.org/pie_flavor/laissezfaire/")
                 licenses {
                     license {
                         name.set("MIT License")
-                        url.set("https://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME/blob/master/LICENSE")
+                        url.set("https://github.com/pie-flavor/LaissezFaire/blob/master/LICENSE")
                     }
                 }
                 developers {
                     developer {
-                        id.set("PS_TEMPLATE_USER_NAME")
-                        name.set("PS_TEMPLATE_USER_REAL_NAME")
-                        email.set("PS_TEMPLATE_USER_EMAIL")
+                        id.set("pie_flavor")
+                        name.set("Adam Spofford")
+                        email.set("aspofford.as@gmail.com")
                     }
                 }
                 scm {
-                    connection.set("scm:git:git://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME.git")
-                    developerConnection.set("scm:git:ssh://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME.git")
-                    url.set("https://github.com/PS_TEMPLATE_GITHUB_USER_NAME/PS_TEMPLATE_PROJECT_NAME/")
+                    connection.set("scm:git:git://github.com/pie-flavor/LaissezFaire.git")
+                    developerConnection.set("scm:git:ssh://github.com/pie-flavor/LaissezFaire.git")
+                    url.set("https://github.com/pie-flavor/LaissezFaire/")
                 }
             }
         }
@@ -105,3 +105,4 @@ publishing {
         }
     }
 }
+
